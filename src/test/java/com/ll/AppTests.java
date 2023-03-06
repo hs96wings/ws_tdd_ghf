@@ -91,4 +91,21 @@ public class AppTests {
                 .contains("2번 명언이 등록되었습니다")
                 .doesNotContain("3번 명언이 등록되었습니다");
     }
+    @Test
+    @DisplayName("명언 등록 후 목록으로 확인해야 한다")
+    public void t7() {
+        String rs = AppTestRunner.run("""
+                등록
+                현재를 사랑하라.
+                작자미상
+                등록
+                나의 죽음을 적들에게 알리지 마라.
+                작자미상
+                목록
+                """);
+        assertThat(rs)
+                .contains("번호 / 작가 / 명언")
+                .contains("2 / 작자미상 / 나의 죽음을 적들에게 알리지 마라.")
+                .contains("1 / 작자미상 / 현재를 사랑하라.");
+    }
 }
