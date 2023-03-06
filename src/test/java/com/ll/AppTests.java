@@ -41,13 +41,7 @@ public class AppTests {
     @Test
     @DisplayName("프로그램 시작시 타이틀 출력 그리고 종료")
     public void t3() {
-        Scanner sc = TestUtil.genScanner("종료");
-        ByteArrayOutputStream output = TestUtil.setOutToByteArray();
-
-        new App(sc).run();
-
-        String rs = output.toString();
-        TestUtil.clearSetOutToByteArray(output);
+        String rs = AppTestRunner.run("");
 
         assertThat(rs)
                 .contains("== 명언 앱 ==")
@@ -59,16 +53,7 @@ public class AppTests {
     @Test
     @DisplayName("잘못된 명령어 입력에 대한 처리")
     public void t4() {
-        Scanner sc = TestUtil.genScanner("""
-                종료2
-                종료
-                """.stripIndent().trim());
-        ByteArrayOutputStream output = TestUtil.setOutToByteArray();
-
-        new App(sc).run();
-
-        String rs = output.toString();
-        TestUtil.clearSetOutToByteArray(output);
+        String rs = AppTestRunner.run("종료2");
 
         assertThat(rs)
                 .contains("== 명언 앱 ==")
