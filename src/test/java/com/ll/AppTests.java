@@ -108,4 +108,28 @@ public class AppTests {
                 .contains("2 / 작자미상 / 나의 죽음을 적들에게 알리지 마라.")
                 .contains("1 / 작자미상 / 현재를 사랑하라.");
     }
+
+    @Test
+    @DisplayName("Rq::getIntParam 유효성 체크")
+    public void t8() {
+        Rq rq = new Rq("삭제?id=1");
+        assertThat(rq.getActionCode()).isEqualTo("삭제");
+        assertThat(rq.getIntParam("id", -1)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("등록된 명언을 삭제할 수 있어야 한다")
+    public void t9() {
+        String rs = AppTestRunner.run("""
+                등록
+                현재를 사랑하라.
+                작자미상
+                등록
+                나의 죽음을 적들에게 알리지 마라.
+                작자미상
+                삭제?id=1
+                """);
+        assertThat(rs)
+                .contains("1번 명언이 삭제되었습니다");
+    }
 }
