@@ -73,6 +73,7 @@ public class App {
                         System.out.printf("%d / %s / %s\n",
                                 wiseSaying.getId(), wiseSaying.getAuthorName(), wiseSaying.getContent());
                     }
+                    break;
                 case "종료":
                     System.out.println("프로그램이 종료되었습니다");
                     return;
