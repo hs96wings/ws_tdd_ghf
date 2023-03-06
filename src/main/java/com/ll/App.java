@@ -22,8 +22,9 @@ public class App {
             String cmd = sc.nextLine().trim();
 
             if (cmd.isEmpty()) continue;
+            Rq rq = new Rq(cmd);
 
-            switch (cmd) {
+            switch (rq.getActionCode()) {
                 case "등록":
                     System.out.print("명언 : ");
                     String content = sc.nextLine().trim();
@@ -36,6 +37,31 @@ public class App {
                     System.out.printf("%d번 명언이 등록되었습니다\n", id);
                     break;
                 case "삭제":
+                    id = rq.getIntParam("id", -1);
+
+                    if (id == -1) {
+                        System.out.println("id(정수)를 입력해주세요");
+                        return;
+                    }
+
+                    WiseSaying search = null;
+
+                    for (WiseSaying wiseSaying : wiseSayings) {
+                        if (wiseSaying.getId() == id) {
+                            search = wiseSaying;
+                            break;
+                        }
+                    }
+
+                    if (search == null) {
+                        System.out.printf("%d번 명언은 존재하지 않습니다\n", id);
+                        return;
+                    }
+
+                    wiseSayings.remove(search);
+                    System.out.printf("%d번 명언이 삭제되었습니다\n", id);
+                    break;
+
 
                 case "목록":
                     System.out.println("번호 / 작가 / 명언");
