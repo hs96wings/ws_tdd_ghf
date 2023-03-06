@@ -35,6 +35,8 @@ public class App {
 
                     System.out.printf("%d번 명언이 등록되었습니다\n", id);
                     break;
+                case "삭제":
+
                 case "목록":
                     System.out.println("번호 / 작가 / 명언");
                     System.out.println("-".repeat(30));
